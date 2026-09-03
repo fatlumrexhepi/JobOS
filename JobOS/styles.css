@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+#homepage {
+    background-image: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)), url("images/Zürich.jpg");
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+
+    height: 100vh;
+    position: relative;
+}
+
+body h1 {
+    font-family: 'Clash Display', Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: clamp(3rem, 6vw, 6.5rem);
+    letter-spacing: -0.03em;
+
+    margin: 0;
+
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100%;
+    text-align: center;
+    color: #dedcdc;
+    text-shadow: 0 0px 11px rgba(70, 69, 69, 0.5);
+}
+
+.qmark-wrap {
+    position: relative;
+    display: inline-block;
+}
+
+.qmark-body {
+    display: inline-block;
+    clip-path: inset(0 0 14% 0);
+    color: #93908e;
+}
+
+.qmark-dot {
+    position: absolute;
+    bottom: -0.01em;
+    left: 50%;
+    transform: translateX(-65%);
+    color: #dedcdc;
+}
+
+.subtitle {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.1rem;
+}
+
+button {
+    position: absolute;
+    top: 51%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    padding: 15px 38px;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur( 5px);
+
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    color: #f2f2f2;
+    font-size: 17px;
+    font-family: 'Clash Display', Helvetica, sans-serif;;
+    text-shadow: 0 0px 9px rgba(70, 69, 69, 0.5);
+    font-weight: 450;
+    font-size: 18px;
+    letter-spacing: 0.03em;
+
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: rgba(255,255,255,0.35);
+    transform: translateX(-50%) translateY(-2px);
+}
+
+#navbar {
+    position: absolute;
+    bottom: 110px;
+    left: 5%;
+    right: 5%;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding: 25px 70px;
+
+    color: white;
+
+    background: rgba(30, 30, 30, 0.22);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 70px;
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: rgba(242, 242, 242, 0.75);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: #ffffff;
+    text-shadow: 0 0 30px #999999;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    color: #f2f2f2;
+    text-shadow: 0 0 7px rgba(0, 0, 0, 0.5), 0 0 7px rgba(0, 0, 0, 0.5);
+
+    position: absolute;
+    bottom: 20px;
+    left: 90px;
+    right: 90px;
+
+    display: flex;
+    justify-content: space-between;
+}
