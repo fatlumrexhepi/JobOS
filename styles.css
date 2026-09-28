@@ -56,10 +56,10 @@ body h1 {
 }
 
 .subtitle {
-    font-family: "Inter", sans-serif;
+    font-family: "Inter", arial, sans-serif;
     font-weight: 300;
     position: absolute;
-    top: 44%;
+    top: 45%;
     left: 50%;
     transform: translateX(-50%);
 
