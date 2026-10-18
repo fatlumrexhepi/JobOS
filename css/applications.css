@@ -62,3 +62,69 @@
     overflow-wrap: anywhere;
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
+
+#applications-table td:last-child {
+    padding-left: 35px;
+}
+#applications-table th:last-child,
+#applications-table td:last-child {
+    border: none;
+}
+
+
+/* code duplication since only temporary! */
+#delete-btn {
+    margin-left: 0;
+    color: #ff6b6b;
+    font-weight: 500;
+    font-size: 15px;
+
+    padding: 15px 28px;
+
+    background: rgba(161, 80, 80, 0.12);
+    backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 0, 0, 0.25);
+    border-radius: 12px;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#delete-btn:hover {
+    background: rgba(133, 16, 16, 0.25);
+    border-color: rgba(92, 21, 21, 0.5);
+
+    transform: translateY(-3px);
+}
+
+#delete-btn:active {
+    transform: translateY(0);
+}
+
+
+#delete-row-button {
+    background: rgba(116, 48, 48, 0.12);
+    color: #ff6b6b;
+    border: 1px solid rgba(220, 65, 65, 0.35);
+    border-radius: 8px;
+    padding: 8px 12px;
+
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+}
+
+#delete-row-button:hover {
+    background: rgba(211, 6, 6, 0.12);
+    border-color: #550b0b;
+
+    transform: translateY(-3px);
+}
+
+#delete-row-button:active {
+    transform: translateY(0);
+}
