@@ -19,7 +19,6 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="applications.html" class="active">Applications</a></li>
-                <li><a href="add-application.html">Add Application</a></li>
             </ul>
         </nav>
     </header>
@@ -28,17 +27,30 @@
 
     <main class="applications-main">
 
-        <div class="page-header">
-    <div>
-        <h1>Your Applications</h1>
-        <p>Manage and track all your job applications.</p>
-    </div>
-        <a id="add-btn" href="add-application.html">Add Application</a>
+    <div class="page-header">
+        <div>
+            <h1>Your Applications</h1>
+            <p>Manage and track all your job applications.</p>
+        </div>
+        <div id="input-field">
+            <input id="url" type="url" placeholder="Paste URL here" >
+            <button for="url" id="url-btn" type="button">Add Application</button>
+        </div>
     </div>
 
         
 
         <section class="applications-panel">
+            <div class="table-titles">
+                <p>Company</p>
+                <p>Briefer</p>
+                <p>Pensum</p>
+                <p>Location</p>
+                <p>Status</p>
+                <p>URL</p>
+                <p>Notes</p>
+
+            </div>
         </section>
 
     </main>

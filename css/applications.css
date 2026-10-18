@@ -4,9 +4,13 @@
     align-items: center;
 }
 
-#add-btn {
+.input-field {
+    display: flex;
+}
+
+#url-btn {
+    margin-left: 0;
     color: white;
-    text-decoration: none;
     font-weight: 500;
     font-size: 15px;
 
@@ -22,13 +26,26 @@
     transition: all 0.3s ease;
 }
 
-#add-btn:hover {
+#url-btn:hover {
     background: rgba(255, 255, 255, 0.25);
     border-color: rgba(255, 255, 255, 0.5);
 
     transform: translateY(-3px);
 }
 
-#add-btn:active {
+#url-btn:active {
     transform: translateY(0);
+}
+
+#url {
+    margin-right: 0;
+    font-weight: 500;
+    font-size: 15px;
+    font-style: italic;
+    text-align: center;
+
+    padding: 15px 60px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
 }
