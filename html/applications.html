@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/applications.css">
+    <script src="../js/applications.js" defer></script>
 </head>
 
 <body id="applications-page">
@@ -34,23 +35,30 @@
         </div>
         <div id="input-field">
             <input id="url" type="url" placeholder="Paste URL here" >
-            <button for="url" id="url-btn" type="button">Add Application</button>
+            <button id="url-btn" type="button">Add Application</button>
         </div>
     </div>
 
         
 
         <section class="applications-panel">
-            <div class="table-titles">
-                <p>Company</p>
-                <p>Briefer</p>
-                <p>Pensum</p>
-                <p>Location</p>
-                <p>Status</p>
-                <p>URL</p>
-                <p>Notes</p>
-
-            </div>
+            <table id="applications-table">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Summary</th>
+                        <th>Pensum</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>URL</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                
+                <tbody id="applications-body">
+           
+                </tbody>
+            </table>
         </section>
 
     </main>
