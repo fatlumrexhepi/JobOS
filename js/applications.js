@@ -57,8 +57,9 @@ function addApplicationRow(url) {
                     deleteButton.addEventListener("click", function() {
                         newRow.remove()
                         applications = applications.filter(function(application) {
-                            return application !== url
-                        })
+                            return application !== url;
+                        });
+                        localStorage.setItem("applications", JSON.stringify(applications))
                     })
                 }
                 else {
