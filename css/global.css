@@ -1,0 +1,145 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Background */
+#home-page,
+#dashboard-page,
+#applications-page {
+    min-height: 100vh;
+    position: relative;
+    isolation: isolate;
+}
+
+#home-page::before,
+#dashboard-page::before,
+#applications-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background: linear-gradient(
+        rgba(0, 0, 0, 0.25),
+        rgba(0, 0, 0, 0.25)
+    ), url("../images/Zürich.jpg") center 35% / cover no-repeat;
+
+    transform: scale(1.05);
+}
+
+#dashboard-page::before,
+#applications-page::before {
+    filter: blur(10px);
+}
+
+/* Navbar - Dashboard & Applications */
+#dashboard-page #navbar,
+#applications-page #navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 6%;
+
+    background: rgba(20, 20, 20, 0.25);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#dashboard-page .logo,
+#applications-page .logo {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+#dashboard-page .nav-links,
+#applications-page .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+/* Gemeinsames Layout */
+.dashboard-main,
+.applications-main {
+    width: 88%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 145px 0 60px;
+    color: white;
+}
+
+/* Titel über der Fläche */
+.page-header {
+    margin-bottom: 30px;
+}
+
+.page-header h1 {
+    font-size: 34px;
+    margin: 0 0 10px;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* Grosse Fläche */
+.dashboard-panel,
+.applications-panel {
+    width: 100%;
+    min-height: 450px;
+    padding: 35px;
+
+    background: rgba(15, 15, 15, 0.55);
+    backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 22px;
+}
+
+@media (max-width: 700px) {
+    .dashboard-main,
+    .applications-main {
+        width: 92%;
+        padding-top: 140px;
+    }
+
+    .dashboard-panel,
+    .applications-panel {
+        padding: 20px;
+    }
+
+    #dashboard-page .nav-links,
+    #applications-page .nav-links {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+}
