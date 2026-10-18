@@ -21,20 +21,7 @@ urlBtn.addEventListener("click", function() {
         applications.push(urlInput.value)
         localStorage.setItem("applications", JSON.stringify(applications));
 
-        let newRow = document.createElement("tr");
-        for(let i=0; i<7; i++) {
-            let newCell = document.createElement("td");
-            newRow.appendChild(newCell);
-            if(i === 5) {
-                newCell.textContent = urlInput.value;
-            }
-            else {
-               newCell.textContent = "-"; 
-            }
-        }
-
-        applicationsBody.appendChild(newRow);
-        console.log(applications);
+        addApplicationRow(urlInput.value)
 
     } else {
         urlInput.placeholder = "Please enter a URL";
@@ -43,3 +30,27 @@ urlBtn.addEventListener("click", function() {
         }, 2000);
     }
 });
+
+
+function addApplicationRow(url) {
+
+    let newRow = document.createElement("tr");
+        for(let j=0; j<7; j++) {
+            
+            let newCell = document.createElement("td");
+
+            newRow.appendChild(newCell);
+                if(j === 5) {
+                            newCell.textContent = url;
+                        }
+                else {
+                    newCell.textContent = "-"; 
+                }
+        }
+        applicationsBody.appendChild(newRow);
+    }
+
+for(let i=0; i<applications.length; i++) {
+    addApplicationRow(applications[i]);
+}
+
