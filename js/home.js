@@ -3,6 +3,6 @@ const startButton = document.getElementById("start-button")
 
 if (startButton) {
     startButton.addEventListener("click", function() {
-        window.location.href = "applications.html"
+        window.location.href = "add-application.html"
     })
 }
