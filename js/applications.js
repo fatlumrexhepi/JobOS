@@ -55,7 +55,10 @@ function addApplicationRow(url) {
                     deleteButton.id = "delete-row-button";
                     newCell.appendChild(deleteButton);
                     deleteButton.addEventListener("click", function() {
-                        console.log("DELETE BUTTON CLICKED")
+                        newRow.remove()
+                        applications = applications.filter(function(application) {
+                            return application !== url
+                        })
                     })
                 }
                 else {
