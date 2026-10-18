@@ -49,3 +49,17 @@
     border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 12px;
 }
+
+#applications-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;}
+
+#applications-table th,
+#applications-table td {
+    padding: 16px;
+    text-align: left;
+    overflow-wrap: anywhere;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background-color: azure;
+}

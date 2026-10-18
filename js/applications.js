@@ -7,11 +7,12 @@ urlBtn.addEventListener("click", function() {
         console.log(urlInput.value);
 
         let newRow = document.createElement("tr");
-        let newCell = document.createElement("td");
+        for(let i=0; i<7; i++) {
+            let newCell = document.createElement("td");
+            newRow.appendChild(newCell);
+            newCell.textContent = "-";
+        }
 
-        newCell.textContent = urlInput.value;
-
-        newRow.appendChild(newCell);
         applicationsBody.appendChild(newRow);
 
     } else {
