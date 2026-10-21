@@ -26,14 +26,15 @@ else {
 }
 
 
-// deleteAll-button logic
+// deleteAll-button
 deleteBtn.addEventListener("click", function(){
         applications = []
         localStorage.setItem("applications", JSON.stringify(applications));
         applicationsBody.innerHTML = "";
 });
 
-// addInput-button logic
+
+// addInput-button
 urlBtn.addEventListener("click", function() {
     if (urlInput.value) {
         
@@ -67,9 +68,10 @@ urlBtn.addEventListener("click", function() {
 function addApplicationRow(application) {
     let newRow = document.createElement("tr");
         
-    for(let i=0; i< columns.length; i++) {
+    for(let i=0; i< columns.length + 2; i++) {
             let newCell = document.createElement("td");
             
+            // add deleteRow-button
             if(i === columns.length) {
                     let deleteButton = document.createElement("button");
                     deleteButton.textContent = "Delete row";
@@ -85,6 +87,24 @@ function addApplicationRow(application) {
                         });
                         localStorage.setItem("applications", JSON.stringify(applications))
                     })}
+
+            else if(i === columns.length +1) {
+                    let editButton = document.createElement("button");
+                    editButton.textContent = "edit input";
+                    editButton.className = "edit-row-button";
+
+                    newCell.appendChild(editButton);
+
+                    editButton.addEventListener("click", function() {
+                        newRow.remove()
+
+                        applications = applications.filter(function(item) {
+                            return item.id !== application.id;
+                        });
+                        localStorage.setItem("applications", JSON.stringify(applications))
+                    })}
+
+
             else {
                 newCell.textContent = application[columns[i]];
             }
