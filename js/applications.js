@@ -7,6 +7,15 @@ let deleteBtn = document.getElementById("delete-btn");
 // other variables
 let job; 
 let applications; 
+const columns = [
+    "company",
+    "summary",
+    "pensum",
+    "location",
+    "status",
+    "url",
+    "notes"
+];
 
 // local storage logic - refreshing page
 if (JSON.parse(localStorage.getItem("applications"))) {
@@ -15,9 +24,6 @@ if (JSON.parse(localStorage.getItem("applications"))) {
 else {
     applications = []
 }
-
-
-
 
 
 // deleteAll-button logic
@@ -38,7 +44,8 @@ urlBtn.addEventListener("click", function() {
             location: "-",
             status: "Pending",
             url: urlInput.value,
-            Notes: "-"
+            notes: "-",
+            id: crypto.randomUUID()
         };
 
         // add current application to list of other applications && store locally
@@ -57,22 +64,13 @@ urlBtn.addEventListener("click", function() {
 });
 
 // add Input to table 
-// {
-//             company: "-",
-//             summary: "-",
-//             pensum: "-",
-//             location: "-",
-//             status: "Pending",
-//             url: urlInput.value,
-//             Notes: "-"
-//         }
 function addApplicationRow(application) {
     let newRow = document.createElement("tr");
         
-    for(let i=0; i<8; i++) {
+    for(let i=0; i< columns.length; i++) {
             let newCell = document.createElement("td");
             
-            if(i === 7) {
+            if(i === columns.length) {
                     let deleteButton = document.createElement("button");
                     deleteButton.textContent = "Delete row";
                     deleteButton.className = "delete-row-button";
@@ -83,12 +81,12 @@ function addApplicationRow(application) {
                         newRow.remove()
 
                         applications = applications.filter(function(item) {
-                            return item !== application;
+                            return item.id !== application.id;
                         });
                         localStorage.setItem("applications", JSON.stringify(applications))
                     })}
             else {
-                newCell.textContent = Object.values(application)[i];
+                newCell.textContent = application[columns[i]];
             }
 
             newRow.appendChild(newCell);
