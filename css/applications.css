@@ -103,7 +103,7 @@
 }
 
 
-#delete-row-button {
+.delete-row-button {
     background: rgba(116, 48, 48, 0.12);
     color: #ff6b6b;
     border: 1px solid rgba(220, 65, 65, 0.35);
@@ -118,13 +118,13 @@
 
 }
 
-#delete-row-button:hover {
+.delete-row-button:hover {
     background: rgba(211, 6, 6, 0.12);
     border-color: #550b0b;
 
     transform: translateY(-3px);
 }
 
-#delete-row-button:active {
+.delete-row-button:active {
     transform: translateY(0);
 }

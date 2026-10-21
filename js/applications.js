@@ -16,6 +16,10 @@ else {
     applications = []
 }
 
+
+
+
+
 // deleteAll-button logic
 deleteBtn.addEventListener("click", function(){
         applications = []
@@ -37,13 +41,12 @@ urlBtn.addEventListener("click", function() {
             Notes: "-"
         };
 
-        // store locally
-        let application = Object.values(job)
-        applications.push(application);
+        // add current application to list of other applications && store locally
+        applications.push(job);
         localStorage.setItem("applications", JSON.stringify(applications));
 
-        // give applications just saved to function - add to table
-        addApplicationRow(application);
+        // give current application to the function - add to table
+        addApplicationRow(job);
 
     } else {
         urlInput.placeholder = "Please enter a URL";
@@ -54,15 +57,25 @@ urlBtn.addEventListener("click", function() {
 });
 
 // add Input to table 
+// {
+//             company: "-",
+//             summary: "-",
+//             pensum: "-",
+//             location: "-",
+//             status: "Pending",
+//             url: urlInput.value,
+//             Notes: "-"
+//         }
 function addApplicationRow(application) {
     let newRow = document.createElement("tr");
-        for(let i=0; i<8; i++) {
+        
+    for(let i=0; i<8; i++) {
             let newCell = document.createElement("td");
-
+            
             if(i === 7) {
                     let deleteButton = document.createElement("button");
                     deleteButton.textContent = "Delete row";
-                    deleteButton.id = "delete-row-button";
+                    deleteButton.className = "delete-row-button";
 
                     newCell.appendChild(deleteButton);
 
@@ -75,30 +88,11 @@ function addApplicationRow(application) {
                         localStorage.setItem("applications", JSON.stringify(applications))
                     })}
             else {
-                newCell.textContent = application[i];
+                newCell.textContent = Object.values(application)[i];
             }
 
-            newRow.appendChild(newCell);}
-                // if(j === 5) {
-                //     newCell.textContent = url;
-                //         }
-                // else if(j === 7) {
-                //     let deleteButton = document.createElement("button");
-                //     deleteButton.textContent = "Delete row";
-                //     deleteButton.id = "delete-row-button";
-                //     newCell.appendChild(deleteButton);
-                //     deleteButton.addEventListener("click", function() {
-                //         newRow.remove()
-                //         applications = applications.filter(function(application) {
-                //             return application !== url;
-                //         });
-                //         localStorage.setItem("applications", JSON.stringify(applications))
-                //     })
-                // }
-                // else {
-                //     newCell.textContent = "-"; 
-                // }
-        
+            newRow.appendChild(newCell);
+        }
         applicationsBody.appendChild(newRow);
     }
 
