@@ -79,6 +79,7 @@ function addApplicationRow(application) {
 
                     newCell.appendChild(deleteButton);
 
+                    // let user delete row:
                     deleteButton.addEventListener("click", function() {
                         newRow.remove()
 
@@ -87,7 +88,8 @@ function addApplicationRow(application) {
                         });
                         localStorage.setItem("applications", JSON.stringify(applications))
                     })}
-
+            
+            // add editRow-button
             else if(i === columns.length +1) {
                     let editButton = document.createElement("button");
                     editButton.textContent = "edit input";
@@ -95,13 +97,27 @@ function addApplicationRow(application) {
 
                     newCell.appendChild(editButton);
 
+                    let cells = newRow.querySelectorAll("td");
+                    // let user edit cell:
                     editButton.addEventListener("click", function() {
-                        newRow.remove()
+                        for(let i=0; i<columns.length; i++){
+                            cells[i].contentEditable = "true"
+                        }
 
-                        applications = applications.filter(function(item) {
-                            return item.id !== application.id;
-                        });
-                        localStorage.setItem("applications", JSON.stringify(applications))
+                        newRow.classList.add("editing")
+                        editButton.textContent = "save input";
+                        
+                        // let user edit cell:
+                        editButton.addEventListener("click", function() {
+                            for(let i=0; i<columns.length; i++){
+                                cells[i].contentEditable = "false"
+                            }
+
+                            newRow.classList.remove("editing")
+                            editButton.textContent = "edit input";  
+                            
+                        })
+
                     })}
 
 
