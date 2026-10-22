@@ -97,26 +97,36 @@ function addApplicationRow(application) {
 
                     newCell.appendChild(editButton);
 
-                    let cells = newRow.querySelectorAll("td");
+
                     // let user edit cell:
+                    let cells = newRow.querySelectorAll("td");
+                    let isEditing = false;
+
                     editButton.addEventListener("click", function() {
-                        for(let i=0; i<columns.length; i++){
+                        
+                        // edit
+                        if(!isEditing){
+                            isEditing = true
+                            for(let i=0; i<columns.length; i++){
                             cells[i].contentEditable = "true"
                         }
 
                         newRow.classList.add("editing")
-                        editButton.textContent = "save input";
+                        editButton.textContent = "save input";}
                         
-                        // let user edit cell:
-                        editButton.addEventListener("click", function() {
+                        //save
+                        else {
+                            isEditing = false
+
+                            //local storage
                             for(let i=0; i<columns.length; i++){
+                                application[columns[i]] = cells[i].textContent;
                                 cells[i].contentEditable = "false"
                             }
-
+                            localStorage.setItem("applications", JSON.stringify(applications));
                             newRow.classList.remove("editing")
-                            editButton.textContent = "edit input";  
-                            
-                        })
+                            editButton.textContent = "edit input";   
+                        }             
 
                     })}
 
