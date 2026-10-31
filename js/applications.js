@@ -51,11 +51,14 @@ urlBtn.addEventListener("click", function() {
                     url: urlInput.value
                 }
             )
-        })
+        })// return jsonify({"error": "Analysis failed"}), 500
             .then(function(response) {
                 return response.json();
             })
             .then(function(data) {
+                if (data.error) {
+                    return alert("Error: " + data.error)
+                }
                 job = {
                     company: data.company,
                     summary: data.summary,

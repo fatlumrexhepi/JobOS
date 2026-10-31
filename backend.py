@@ -5,14 +5,12 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 from google import genai
-from google.genai import types
+from google.genai import types, errors
 
 load_dotenv()
 client = genai.Client(
     api_key=os.getenv("GEMINI_API_KEY")
 )
-
-
 
 app = Flask(__name__)
 CORS(app, origins=["http://127.0.0.1:5502"])
@@ -26,7 +24,6 @@ def test():
         url = data["url"]
 
         ai_response = client.models.generate_content(
-
             model=os.getenv("GEMINI_MODEL"),
             contents=f"""
             Analyze the job posting at this URL:
@@ -40,7 +37,7 @@ def test():
 
             Return only valid JSON.
             Use empty strings for missing information.
-            Never invent information.
+            NEVER invent information.
             """,
             config=types.GenerateContentConfig(
                 tools=[
@@ -62,16 +59,25 @@ def test():
 
 
         return jsonify({
-        "company": job_data.get("company", ""),
-        "summary": job_data.get("summary", ""),
-        "pensum": job_data.get("pensum", ""),
-        "location": job_data.get("location", ""),
-        "status": "Pending",
-        "url": url,
-        "notes": ""
+            "company": job_data.get("company", ""),
+            "summary": job_data.get("summary", ""),
+            "pensum": job_data.get("pensum", ""),
+            "location": job_data.get("location", ""),
+            "status": "Pending",
+            "url": url,
+            "notes": ""
     })
-    except Exception as e:
-        print(e)
+    except errors.ClientError as e:
+        if e.code == 429:
+            return jsonify({
+                "error": "Gemini API limit reached. Please try again later."
+            }), 429
+
+        app.logger.exception("Gemini API error")
+        return jsonify({"error": "Gemini API error"}), 502
+
+    except Exception:
+        app.logger.exception("Analysis failed")
         return jsonify({"error": "Analysis failed"}), 500
 
 
