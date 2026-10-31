@@ -1,12 +1,17 @@
 from flask import Flask, jsonify, request 
 #informatioinen über die gesamte eingehende HTTP-Anfrage
+import json
 from flask_cors import CORS
-import requests
 import os
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
 load_dotenv()
+client = genai.Client(
+    api_key=os.getenv("GEMINI_API_KEY")
+)
+
 
 
 app = Flask(__name__)
@@ -15,30 +20,59 @@ CORS(app, origins=["http://127.0.0.1:5502"])
 
 @app.route("/", methods=["POST"])
 def test():
-    data = request.get_json()
-    url = data["url"]
     
-    response = requests.get(url, timeout=10)
+    try:
+        data = request.get_json()
+        url = data["url"]
 
-    print(response.status_code)
-    print(url)
+        ai_response = client.models.generate_content(
+
+            model=os.getenv("GEMINI_MODEL"),
+            contents=f"""
+            Analyze the job posting at this URL:
+            {url}
+
+            Extract:
+            - company
+            - summary
+            - pensum
+            - location
+
+            Return only valid JSON.
+            Use empty strings for missing information.
+            Never invent information.
+            """,
+            config=types.GenerateContentConfig(
+                tools=[
+                    types.Tool(google_search=types.GoogleSearch()),
+                    types.Tool(url_context=types.UrlContext())
+                ],
+            )
+        )
+
+        print(ai_response.text)
+
+        clean_text = ai_response.text.strip()
+        clean_text = clean_text.removeprefix("```json")
+        clean_text = clean_text.removesuffix("```")
+        clean_text = clean_text.strip()
+
+        job_data = json.loads(clean_text)
+    
 
 
-    return jsonify({
-        "company": "okkkk",
-        "summary": "ok",
-        "pensum": "ok",
-        "location": "ok",
-        "status": "ok",
+        return jsonify({
+        "company": job_data.get("company", ""),
+        "summary": job_data.get("summary", ""),
+        "pensum": job_data.get("pensum", ""),
+        "location": job_data.get("location", ""),
+        "status": "Pending",
         "url": url,
-        "notes": "ok",
-        "id": "ok"
+        "notes": ""
     })
-
-
-
-
-
+    except Exception as e:
+        print(e)
+        return jsonify({"error": "Analysis failed"}), 500
 
 
 if __name__ == "__main__":
