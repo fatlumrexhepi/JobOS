@@ -34,10 +34,24 @@ deleteBtn.addEventListener("click", function(){
 
 });
 
+function isValidURL(input) {
+    try {
+        const url = new URL(input);
+        if(url.protocol === "https:" || url.protocol === "http:") { 
+            return url.protocol === "https:" || url.protocol === "http:";
+        }
+        else {
+            alert("Please enter a full URL (e.g. https://example.com)");
+            return false }
+    } catch {
+        alert("Please enter a full URL (e.g. https://example.com)");
+        return false
+    }
+}
 
 // addInput-button
 urlBtn.addEventListener("click", function() {
-    if (urlInput.value) {
+    if (isValidURL(urlInput.value)) {
             fetch("http://127.0.0.1:5050/", {
             method: "POST", // Was für HTTP-Anfrage machen wir
                 
