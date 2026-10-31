@@ -31,6 +31,7 @@ deleteBtn.addEventListener("click", function(){
         applications = []
         localStorage.setItem("applications", JSON.stringify(applications));
         applicationsBody.innerHTML = "";
+
 });
 
 
@@ -62,6 +63,28 @@ urlBtn.addEventListener("click", function() {
             urlInput.placeholder = "Paste URL here";
         }, 2000);
     }
+
+    fetch("http://127.0.0.1:5050/", {
+            method: "POST", // Was für HTTP-Anfrage machen wir
+                
+            headers: 
+            {
+                "Content-Type": "application/json" // Zusätzliche Informationen
+            },
+
+            body : JSON.stringify ( // konkreten Daten, die wir an den Server schicken.
+                {
+                    url: urlInput.value
+                }
+            )
+        })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log(data.message);
+            });
+
 });
 
 // add Input to table 
@@ -144,3 +167,5 @@ function addApplicationRow(application) {
 for(let i=0; i<applications.length; i++) {
     addApplicationRow(applications[i]);
 }
+
+
