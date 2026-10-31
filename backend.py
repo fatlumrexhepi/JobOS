@@ -1,6 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request 
+#informatioinen über die gesamte eingehende HTTP-Anfrage
 from flask_cors import CORS
 import requests
+import os
+from dotenv import load_dotenv
+from google import genai
+
+load_dotenv()
 
 
 app = Flask(__name__)
@@ -14,7 +20,10 @@ def test():
     
     response = requests.get(url, timeout=10)
 
+    print(response.status_code)
     print(url)
+
+
     return jsonify({
         "company": "okkkk",
         "summary": "ok",
