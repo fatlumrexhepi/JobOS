@@ -38,33 +38,7 @@ deleteBtn.addEventListener("click", function(){
 // addInput-button
 urlBtn.addEventListener("click", function() {
     if (urlInput.value) {
-        
-        job = {
-            company: "-",
-            summary: "-",
-            pensum: "-",
-            location: "-",
-            status: "Pending",
-            url: urlInput.value,
-            notes: "-",
-            id: crypto.randomUUID()
-        };
-
-        // add current application to list of other applications && store locally
-        applications.push(job);
-        localStorage.setItem("applications", JSON.stringify(applications));
-
-        // give current application to the function - add to table
-        addApplicationRow(job);
-
-    } else {
-        urlInput.placeholder = "Please enter a URL";
-        setTimeout(function() {
-            urlInput.placeholder = "Paste URL here";
-        }, 2000);
-    }
-
-    fetch("http://127.0.0.1:5050/", {
+            fetch("http://127.0.0.1:5050/", {
             method: "POST", // Was für HTTP-Anfrage machen wir
                 
             headers: 
@@ -82,8 +56,35 @@ urlBtn.addEventListener("click", function() {
                 return response.json();
             })
             .then(function(data) {
-                console.log(data.message);
+                job = {
+                    company: data.company,
+                    summary: data.summary,
+                    pensum: data.pensum,
+                    location: data.location,
+                    status: data.status,
+                    url: data.url,
+                    notes: data.notes,
+                    id: crypto.randomUUID()
+                    };
+            
+                // add current application to list of other applications && store locally
+                applications.push(job);
+                localStorage.setItem("applications", JSON.stringify(applications));
+
+                // give current application to the function - add to table
+                addApplicationRow(job);
+    
             });
+
+
+    } else {
+        urlInput.placeholder = "Please enter a URL";
+        setTimeout(function() {
+            urlInput.placeholder = "Paste URL here";
+        }, 2000);
+    }
+
+
 
 });
 
