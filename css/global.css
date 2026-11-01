@@ -196,3 +196,13 @@ body {
 #page-transition.animate {
     transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
 }
+
+
+html {
+    background-color: #101418;
+}
+
+body {
+    background-color: #101418;
+}
+

@@ -50,22 +50,39 @@
     border-radius: 12px;
 }
 
+/*Table*/
 #applications-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
 }
 
-/* Tabelle */
+/* Spaltenüberschriften */
+#applications-table th {
+    padding: 18px 16px;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.65);
 
-    /* Alle Tabellenzellen */
-    #applications-table th,
-    #applications-table td {
-        padding: 16px;
-        text-align: left;
-        overflow-wrap: anywhere;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-    }
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Tabellenzellen */
+#applications-table td {
+    padding: 20px 16px;
+    text-align: left;
+    overflow-wrap: anywhere;
+
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* Hover */
+#applications-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.045);
+}
 
     /* Beide Button-Spalten */
     #applications-table td:nth-last-child(2),
