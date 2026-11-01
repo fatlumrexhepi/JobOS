@@ -7,8 +7,8 @@ let count_inNumber = 0
 let count_ofNumber = 0
 
 
-let applications = JSON.parse(localStorage.getItem("applications")) || 
-[]
+let applications = JSON.parse(localStorage.getItem("applications")) || []
+
 apNumber.textContent = applications.length
 inNumber.textContent = applications.filter(app => app.status === "interview").length
 ofNumber.textContent = applications.filter(app => app.status === "pending").length

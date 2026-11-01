@@ -37,73 +37,75 @@ deleteBtn.addEventListener("click", function(){
 function isValidURL(input) {
     try {
         const url = new URL(input);
-        if(url.protocol === "https:" || url.protocol === "http:") { 
-            return url.protocol === "https:" || url.protocol === "http:";
-        }
-        else {
+
+        if (url.protocol === "https:" || url.protocol === "http:") {
+            return true;
+        } else {
             alert("Please enter a full URL (e.g. https://example.com)");
-            return false }
+            return false;
+        }
     } catch {
         alert("Please enter a full URL (e.g. https://example.com)");
-        return false
+        return false;
     }
 }
 
 // addInput-button
 urlBtn.addEventListener("click", function() {
-    if (isValidURL(urlInput.value)) {
-            fetch("http://127.0.0.1:5050/", {
-            method: "POST", // Was für HTTP-Anfrage machen wir
-                
-            headers: 
-            {
-                "Content-Type": "application/json" // Zusätzliche Informationen
-            },
-
-            body : JSON.stringify ( // konkreten Daten, die wir an den Server schicken.
-                {
-                    url: urlInput.value
-                }
-            )
-        })// return jsonify({"error": "Analysis failed"}), 500
-            .then(function(response) {
-                return response.json();
-            })
-            .then(function(data) {
-                if (data.error) {
-                    return alert("Error: " + data.error)
-                }
-                job = {
-                    company: data.company,
-                    summary: data.summary,
-                    pensum: data.pensum,
-                    location: data.location,
-                    status: data.status,
-                    url: data.url,
-                    notes: data.notes,
-                    id: crypto.randomUUID()
-                    };
-            
-                // add current application to list of other applications && store locally
-                applications.push(job);
-                localStorage.setItem("applications", JSON.stringify(applications));
-
-                // give current application to the function - add to table
-                addApplicationRow(job);
-    
-            });
-
-
-    } else {
+    if (!urlInput.value) {
         urlInput.placeholder = "Please enter a URL";
         setTimeout(function() {
-            urlInput.placeholder = "Paste URL here";
+        urlInput.placeholder = "Paste URL here";
         }, 2000);
     }
+        
+    else if (isValidURL(urlInput.value)) {
+        fetch("http://127.0.0.1:5050/", {
+        method: "POST", // Was für HTTP-Anfrage machen wir
+            
+        headers: 
+        {
+            "Content-Type": "application/json" // Zusätzliche Informationen
+        },
 
+        body : JSON.stringify ( // konkreten Daten, die wir an den Server schicken.
+            {
+                url: urlInput.value
+            }
+        )
+    })// return jsonify({"error": "..."}), 500
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.error) {
+                return alert("Error: " + data.error)
+            }
+            job = {
+                company: data.company,
+                summary: data.summary,
+                pensum: data.pensum,
+                location: data.location,
+                status: data.status,
+                url: data.url,
+                notes: data.notes,
+                id: crypto.randomUUID()
+                };
+        
+            // add current application to list of other applications && store locally
+            applications.push(job);
+            localStorage.setItem("applications", JSON.stringify(applications));
 
-
+            // give current application to the function - add to table
+            addApplicationRow(job);
+            })
+        .catch(function(error) {
+            alert("Unable to connect to the server. Please check your connection and try again later.");
+            console.error(error);
+        });
+        }
 });
+
 
 // add Input to table 
 function addApplicationRow(application) {

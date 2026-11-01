@@ -28,7 +28,11 @@ def test():
             contents=f"""
             Analyze the job posting at this URL:
             {url}
+            If the website cannot be accessed:
+            return this JSON object:
+            {{"error": "The website could not be found."}}
 
+            If the website can be accessed: 
             Extract:
             - company
             - summary
@@ -36,6 +40,7 @@ def test():
             - location
 
             Return only valid JSON.
+            
             Use empty strings for missing information.
             NEVER invent information.
             """,
@@ -57,16 +62,22 @@ def test():
         job_data = json.loads(clean_text)
     
 
+        if job_data.get("error"): 
+            return jsonify({
+                "error": "The website could not be found."
+            })
 
-        return jsonify({
-            "company": job_data.get("company", ""),
-            "summary": job_data.get("summary", ""),
-            "pensum": job_data.get("pensum", ""),
-            "location": job_data.get("location", ""),
-            "status": "Pending",
-            "url": url,
-            "notes": ""
+        else:
+            return jsonify({
+                "company": job_data.get("company", ""),
+                "summary": job_data.get("summary", ""),
+                "pensum": job_data.get("pensum", ""),
+                "location": job_data.get("location", ""),
+                "status": "Pending",
+                "url": url,
+                "notes": ""
     })
+
     except errors.ClientError as e:
         if e.code == 429:
             return jsonify({
