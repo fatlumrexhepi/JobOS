@@ -206,3 +206,32 @@ body {
     background-color: #101418;
 }
 
+@keyframes content-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes content-exit {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+}
+
+.page-content {
+    animation: content-enter 220ms ease-out both;
+}
+
+.page-content.is-leaving {
+    animation: content-exit 120ms ease-in forwards;
+}

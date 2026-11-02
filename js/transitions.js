@@ -79,3 +79,21 @@
         navigateTo(url.href);
     });
 })();
+
+
+document.querySelectorAll('a[href="dashboard.html"], a[href="applications.html"]').forEach(link => {
+    link.addEventListener("click", function (event) {
+        const content = document.querySelector(".page-content");
+
+        if (!content || !document.body.classList.contains("internal-page")) {
+            return;
+        }
+
+        event.preventDefault();
+        content.classList.add("is-leaving");
+
+        setTimeout(() => {
+            window.location.href = link.href;
+        }, 120);
+    });
+});
